@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>原生JS搭建一个网易云的播放器</title>
+  <style media="screen">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body,html {
+      width: 100%;
+      background-color: #b1e0fa;
+      background-image: linear-gradient(top, #ebeef2, #b1e0fa);
+      z-index: -2;
+    }
+    .page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 100px;
+      position: relative;
+      width: 400px;
+    }
+    .play_disc {
+      /*margin上下0  左右居中*/
+      margin: 0px auto 0px;
+      width: 200px;
+      height: 200px;
+      /*backgroud-size 100% auto */
+      background: url('./disc.png') center center no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /*宽度100% 高度自适应*/
+      background-size: 100% auto;
+
+      padding: 0px;
+      /*opacity: .1;*/
+      outline: 0;
+      z-index: 100;
+      border-radius: 50%
+    }
+    .rotate {
+      animation: rotate 10s infinite linear;
+    }
+    .stop {
+      animation-play-state:paused;
+    }
+    .play_disc .img {
+      /*margin-top: 30px;*/
+      width: 130px;
+      height: 130px;
+      background: red;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 130px;
+      background: url('beauty.jpg') center center;
+      -webkit-background-size: 100% auto;
+      background-size: 100% auto;
+      z-index: 100;
+      color: #FFD700;
+    }
+    .play_needle {
+      background: url('./play_needle.png') no-repeat;
+      width: 70px;
+      height: 120px;
+      display: inline-block;
+      z-index: 1000;
+      position: absolute;
+      background-size: 100% auto;
+      top: -60px;
+      left: 185px;
+      transform-origin: 0 0;
+      transform: rotate(-25deg);
+      transition:  all .6s;
+    }
+    .mb {
+      z-index: 1;
+      width: 210px;
+      height: 210px;
+      background: #fff;
+      opacity: 0.3;
+      display: inline-block;
+      position: absolute;
+      left: 50%;
+      margin-left: -105px;
+      top: -5px;
+      border-radius: 50%
+    }
+    .mbin {
+      z-index: 10;
+      width: 190px;
+      height: 190px;
+      background: #000;
+      border-radius: 50%;
+      margin-left: 10px;
+      margin-top: 10px;
+      opacity: .2
+    }
+    .btn {
+      margin: 20px 0px 0px 180px;
+      height: 50px;
+      width: 50px;
+      background: #C67171;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 50px;
+    }
+    .btn a {
+      text-decoration: none;
+      color: #BFEFFF;
+    }
+    @keyframes rotate {
+      from {
+        transform:  rotate(0deg);
+      } to {
+        transform:  rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="play_needle stop"></div>
+    <div class="play_disc">
+      <div class="img">网易云</div>
+    </div>
+    <div class="mb">
+      <div class="mbin"></div>
+    </div>
+  </div>
+  <div class="btn">
+    <a href="javascript:;">播放</a>
+  </div>
+
+  <script type="text/javascript">
+    var btn = document.querySelector('.btn')
+    var needle = document.querySelector('.play_needle')
+    var disc = document.querySelector('.play_disc');
+    var start = true
+    btn.addEventListener('click',function() {
+      if (start) {
+        needle.style.transform ='rotate(0deg)'
+        disc.className="play_disc rotate"
+
+      } else {
+        needle.style.transform ='rotate(-25deg)'
+        disc.className="play_disc rotate stop"
+      }
+      start = !start
+    })
+    //移动disc 来切换歌 （disc唱片）
+  </script>
+
+
+</body>
+</html>
